@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rethinking Evaluation - Yue Hu</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="post.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">Yue Hu</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <article class="post-content">
+                <div class="post-header">
+                    <h1>Rethinking Evaluation</h1>
+                    <div class="post-meta">
+                        <span>July 25, 2025</span>
+                        <span>10 min read</span>
+                    </div>
+                </div>
+
+                <div class="post-body">
+                    <p>When building AI agents, we jump straight to the code, build fancy demos that look good, and convince ourselves it works—mission accomplished. If someone brings up evaluation? "Yeah, good idea," we say, then file it under "nice-to-have" and get back to the real work. Let's be honest: evaluation feels like homework when you could be shipping features. Why waste time when you have brilliant ideas to add to your fancy agents?</p>
+
+                    <p>And it gets worse. Building evaluation is hard. Your evaluation process has to be tailored to each specific problem—there's no fixed framework, and sometimes you need to get creative. What's worse: the data. It's a nightmare to generate. The problem you're trying to solve hasn't been solved by other methods, and you're attempting to build the very method to generate data. This is a chicken-and-egg problem. So you carefully craft a few examples manually, run a test, get a number that looks okay, and call it a day. But how well does that data represent the problem domain you're trying to solve? You know it's not sufficient, but it's just too hard to cover properly. So you give up on it. Then it becomes a metric shared with your stakeholders to approve your excellent work. And that data gets archived somewhere in your codebase, never to be touched again.</p>
+
+                    <p>In the best scenario, people realize the importance of evaluation because they have architectural choices to make and they're tired of endless, meaningless discussions with peers who hold different opinions. They keep building datasets and establishing baselines for each iteration of every decision. At least they have some numbers to back up their ideas. Sounds good, right?</p>
+
+                    <p>That's what I was proposing to the team a few months ago. Now I realize I was dead wrong—I completely underestimated its power. Here's why:</p>
+
+                    <p>If we look at the revolution in machine learning history, it's fundamentally about replacing human knowledge with data. In computer vision, before deep learning, people hand-crafted features from images and maxed out at 74% accuracy. Then AlexNet came along, jumped to 84%, and the field quickly saturated within five years with this data-driven technology. What did deep learning (neural networks) actually do?</p>
+
+                    <p>You have inputs, you have ideal outputs, and there's a black box that maps one to the other. What researchers did was create massive datasets—millions of images—and let an algorithm learn that black box. The black box is the neural network, and it learns by updating its weights step by step. The magic of generalization happens because: first, neural networks can theoretically approximate any function, and second, those tiny steps with small batch updates adjust the weights in ways that avoid overfitting and local minima.</p>
+
+                    <p>Let's look at another example: gradient boosting machines. Same pattern: inputs, ideal outputs, and a black box mapping between them. Here, the gradient boosting machine is the black box. But when it learns, we don't update weights (you could argue it still updates weights, but bear with me)—instead, we add small trees at each step, gradually reducing the remaining errors until we're satisfied. Why does this work? Because we're progressively reducing errors in training datasets at each step (data-driven), and the changes we add are tiny (weak models), which helps with generalization.</p>
+
+                    <p>And don't get me even started on LLMs for the power of data...</p>
+
+                    <p>Here's the pattern: if we have inputs and ideal outputs with an underlying function mapping between them, we can design an algorithm to learn that black box. Scale the data and compute, and the problem is solved.</p>
+
+                    <p>Now I want to argue that building AI Agents should follow the same pattern. The black box is our Agent—a combination of tools wrapped around a prompt. Learning means updating the system, either the prompt or the tools (the latter being code). And who can write prompts better than an LLM? And as we've observed in the progression of AI coding, we should expect it to optimize code even better. Even more beautifully, this learning process is observable. In machine learning, you design small steps to avoid overfitting, monitoring the loss indirectly. In prompt optimization, the updates are human-readable—you can actually inspect the "weights" after each iteration to ensure the system is covering general cases and improving scores rather than gaming the system!</p>
+
+                    <p>Yes, the hand-crafting approach works in the short term, but we need to remove ourselves from these manual systems by scaling data and compute. Just as Richard Sutton noted in his famous blog "The Bitter Lesson," data-driven solutions always win, because human priors simply can't imagine real-life complexity.</p>
+
+                    <p>You may ask: so where is the data? This is exactly like when machine learning first became popular. Companies wanted to jump in, but there wasn't enough data. Over time, often years, we built infrastructure to collect and process data. Now we can finally have teams of data scientists solving problems that are beyond the ability of even our best minds.</p>
+
+                    <p>So I don't want to call it evaluation anymore. That's disrespectful to the real power our data has. I want to call it data-driven agent learning. We're not using data just to measure our progress—it IS the progress itself. In the long run, that's where we should focus. Because if the history of machine learning taught us anything, it's that data always wins.</p>
+                </div>
+
+                <div class="post-footer">
+                    <a href="../index.html" class="back-link">← Back to all posts</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Yue Hu. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/yuehu">GitHub</a>
+                <a href="https://linkedin.com/in/yuehu">LinkedIn</a>
+                <a href="https://twitter.com/yuehu">Twitter</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
